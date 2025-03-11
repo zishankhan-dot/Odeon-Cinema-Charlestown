@@ -8,3 +8,7 @@ li:a{
 strong{
     font-family:fantasy;
 }
+.carousel-image{
+    max-height: 650px;
+    object-fit: contain;
+}
