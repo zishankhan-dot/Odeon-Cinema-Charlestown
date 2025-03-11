@@ -12,3 +12,11 @@ strong{
     max-height: 650px;
     object-fit: contain;
 }
+.card-img-top{
+    max-height: 425px;
+    object-fit: cover;
+    opacity: 90%;
+}
+.card-img-top:hover{
+    opacity: 100%;
+}
