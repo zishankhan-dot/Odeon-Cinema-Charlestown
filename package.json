@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodejs": "^0.0.0"
+  },
+  "name": "odeon-cinema-charlestown",
+  "version": "1.0.0",
+  "description": "CA PROJECT \r --vs code enabled for git push and commit ...",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodejs ./backend/server/server.js"
+  },
+  "author": "",
+  "license": "MIT"
+}
