@@ -2,19 +2,25 @@ import express from 'express'
 import dotenv from 'dotenv'
 import * as fs from 'node:fs';
 import userRouter from '../Routes/userRoute.js';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename=fileURLToPath(import.meta.url)
+const __dirname=path.dirname(__filename);
 
 dotenv.config({path:'./config.env'})
 
 
 
-const PORT=process.env.PORT;
+const PORT=process.env.PORT   || 3000;
+const HOST='0.0.0.0';
 
 const express_api=express();
 
 
 
 //static files using express 
-express_api.use(express.static('./Frontend'));
+express_api.use(express.static(path.join(__dirname,'../../Frontend')));
 //middleware
 express_api.use(express.json());
 
@@ -55,7 +61,7 @@ express_api.post('/user.html',(req,res)=>{
 express_api.use('/User',userRouter);
 
 
-express_api.listen(PORT,(err)=>{
+express_api.listen(PORT,HOST,(err)=>{
     console.log(`running at port : ${PORT}`);
     
 })
