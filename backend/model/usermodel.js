@@ -9,15 +9,36 @@ const id=Schema.Types.ObjectId;
 //creating schema
 const userSchema=new Schema({
     userId:id,
-    Email:{type: String,required: true, unique: true},
-    password:{type: String,required: true},
+    Name:{type:String,required:true},
+    Email:{type: String,required: true, unique: true,match:/\.com$/},
+    Password:{type: String,required: true},
+    ConfirmPassword:{
+        type:String,
+        required:true,
+        validate:{
+            validator:function(value){
+                return this.Password===value;
+            },
+            message:"password dont match"
+        }
+
+    },
     createdAt:{type: Date,default:Date.now,immutable:true},
 });
+//middleware to not save the confirmpassword just for validation in frontend!!
+userSchema.pre('save',function(next){
+this.ConfirmPassword=undefined;
+next();
+})
 //using created schema to model it 
 const User=mongoose.model("User",userSchema);
 
 //exporting User model 
 export default User;
+
+
+
+
 
 //test caseses :
 /*
