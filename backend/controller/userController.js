@@ -1,14 +1,26 @@
 import User from "../model/usermodel.js";
+import Dotenv  from "dotenv";
+import jwt  from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+//include config file
+Dotenv.config({path:"./config.env"});
+//using secret_token from env
+const secretkey=process.env.SECRET_TOKEN;
+//using pepper from env
+const pepper=process.env.PEPPER;
+
 
 
 //function to create new user 
 
 export const createNewUser=async (req,res)=>{
+    console.log(req.body);
     try{
     const {Name,Email,Password,ConfirmPassword}=req.body;
     if(!Email || !Password){res.status(402).json({message:"ERROR EMAIL AND PASSWORD REQUIRED"})}
     const existinguser= await   User.findOne({Email});
     if(existinguser){return res.status(409).json({message:"this user already exist"})}
+    else if (!(Password === ConfirmPassword)){return res.status(402).json({message:"ERROR PASSWORD AND CONFIRM PASSWORD DONT MATCH !!"})}
     else{
         const newuser=new User({Name,Email,Password,ConfirmPassword});
         await newuser.save();
@@ -20,3 +32,24 @@ catch(error){
 console.error(error);
 }}
 
+
+export const loginUser=async (req,res)=>{
+   const {Email,Password}=req.body;
+   if(!Email || !Password){return res.status(402).json({message:"Please input mail and password !!"})}
+   const isUser= await User.findOne({Email})
+   if(!isUser){return res.status(402).json({message:"EMAIL NOT FOUND!!"})}
+   const isPassword=await bcrypt.compare(pepper+Password,isUser.Password);
+   if(!isPassword){return res.status(402).json({message:"PASSWORD INCORRECT!!"})}
+   const token=jwt.sign({
+    userId:isUser._id,
+    Email:isUser.Email
+   },secretkey,{expiresIn:"2h"});
+   res.status(200).json({
+    message:"login successful",
+    token,
+
+   })
+
+
+
+}

@@ -1,4 +1,10 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import Dotenv from "dotenv";
+Dotenv.config({path:"./config.env"})
+
+const pepper=process.env.PEPPER
+// call config file 
 //connecting to local MongoDB
 mongoose.connect("mongodb://localhost:27017/")
     .then(()=>console.log("connected successfully!!"));
@@ -30,6 +36,15 @@ userSchema.pre('save',function(next){
 this.ConfirmPassword=undefined;
 next();
 })
+
+
+// hashing password before saving it 
+userSchema.pre('save',async function(next){
+this.Password=await bcrypt.hash(pepper+this.Password,10);
+console.log(pepper);
+next();
+})
+
 //using created schema to model it 
 const User=mongoose.model("User",userSchema);
 
