@@ -49,7 +49,31 @@ export const loginUser=async (req,res)=>{
     token,
 
    })
+}
 
 
+// Middleware to check token 
+export const checkToken=(req,res,next)=>{
+    const token=req.headers.authorization.split(" ")[0];
+    try{
+       const decode= jwt.verify(token,secretkey)
+        req.userData=decode;
+        console.log("successfull verification !!");
+        next();
+    
+    }
+    catch(error){
+        console.log(error)
+        return res.status(402).json({message:"failed token verification !! login again"})
+         
+         
+    }
+}
 
+export const userDetail=(req,res,next)=>{
+    const userId=req.userData.userId;
+    console.log(userId)
+    return res.json({data:req.userData})
+    
+    
 }
