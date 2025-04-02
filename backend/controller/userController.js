@@ -2,6 +2,7 @@ import User from "../model/usermodel.js";
 import Dotenv  from "dotenv";
 import jwt  from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+
 //include config file
 Dotenv.config({path:"./config.env"});
 //using secret_token from env
@@ -44,9 +45,13 @@ export const loginUser=async (req,res)=>{
     userId:isUser._id,
     Email:isUser.Email
    },secretkey,{expiresIn:"2h"});
+
+   /// setting token to cookie ..
+   res.cookie("authorization",token,{
+    maxAge:360000
+   })
    res.status(200).json({
     message:"login successful",
-    token,
 
    })
 }
@@ -54,7 +59,12 @@ export const loginUser=async (req,res)=>{
 
 // Middleware to check token 
 export const checkToken=(req,res,next)=>{
-    const token=req.headers.authorization.split(" ")[0];
+    const token=req.cookies.authorization;
+    //checking cookie 
+    console.log(req.cookies);
+    if(!token){
+        return res.status(402).json({message:"token not found , login again!!!!"})
+    }
     try{
        const decode= jwt.verify(token,secretkey)
         req.userData=decode;
@@ -70,10 +80,9 @@ export const checkToken=(req,res,next)=>{
     }
 }
 
-export const userDetail=(req,res,next)=>{
+export const userDetail=(req,res)=>{
     const userId=req.userData.userId;
     console.log(userId)
     return res.json({data:req.userData})
-    
     
 }

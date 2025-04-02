@@ -4,6 +4,8 @@ import * as fs from 'node:fs';
 import userRouter from '../Routes/userRoute.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import cookieParser from 'cookie-parser';
+
 
 const __filename=fileURLToPath(import.meta.url)
 const __dirname=path.dirname(__filename);
@@ -17,6 +19,9 @@ const HOST='0.0.0.0';
 
 const express_api=express();
 
+
+//cookie parser middleware 
+express_api.use(cookieParser());
 
 
 //static files using express 

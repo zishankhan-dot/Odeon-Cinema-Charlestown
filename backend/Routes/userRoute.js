@@ -5,6 +5,8 @@ const userRouter=express.Router();
 
 userRouter.post('/new',createNewUser)
 userRouter.post('/login',loginUser)
-userRouter.post('/cart',checkToken,userDetail)
+userRouter.get('/cart',checkToken,userDetail,(req,res)=>{
+    res.status(200).json({message:"successfully in cart page .. "})
+})
 
 export default userRouter;
