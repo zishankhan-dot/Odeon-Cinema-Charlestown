@@ -80,9 +80,9 @@ export const checkToken=(req,res,next)=>{
     }
 }
 
-export const userDetail=(req,res)=>{
+export const userDetail=(req,res,next)=>{
     const userId=req.userData.userId;
     console.log(userId)
-    return res.json({data:req.userData})
+    next()
     
 }

@@ -10,13 +10,26 @@ strong{
 }
 .carousel-image{
     max-height: 650px;
-    object-fit: contain;
+    object-fit: cover;
 }
 .card-img-top{
     max-height: 425px;
     object-fit: cover;
-    opacity: 90%;
+    opacity: 80%;
+    border:1px solid white;
 }
 .card-img-top:hover{
     opacity: 100%;
+}
+.card-body{
+    background-color:rgb(8, 20, 36);
+    color:white;
+    border: 1px solid white;
+}
+.input-number{
+    border-radius: 0%;
+    border:0px;
+}
+.btn{
+    border-radius: 0%;
 }
