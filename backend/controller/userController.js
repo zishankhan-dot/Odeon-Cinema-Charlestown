@@ -48,7 +48,7 @@ export const loginUser=async (req,res)=>{
 
    /// setting token to cookie ..
    res.cookie("authorization",token,{
-    maxAge:360000
+    maxAge:3600000  // 60 mins 
    })
    res.status(200).json({
     message:"login successful",
@@ -79,10 +79,11 @@ export const checkToken=(req,res,next)=>{
          
     }
 }
-
+//sending user detail to fronend .. Middleware
 export const userDetail=(req,res,next)=>{
     const userId=req.userData.userId;
-    console.log(userId)
+    const Email=req.userData.Email;
+    console.log(userId,Email)
     next()
     
 }

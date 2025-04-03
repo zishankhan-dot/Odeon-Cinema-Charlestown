@@ -5,6 +5,8 @@ import userRouter from '../Routes/userRoute.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import cookieParser from 'cookie-parser';
+import cartRoute from '../Routes/cartRoute.js'
+import cartRouter from '../Routes/cartRoute.js';
 
 
 const __filename=fileURLToPath(import.meta.url)
@@ -64,6 +66,13 @@ express_api.post('/user.html',(req,res)=>{
 
 /// user userroute to 
 express_api.use('/User',userRouter);
+
+//cart route 
+express_api.use('/cart',cartRouter,(req,res)=>{
+    res.status(200).json({
+        message:"updated successfully !!"
+    })
+});
 
 
 express_api.listen(PORT,HOST,(err)=>{
