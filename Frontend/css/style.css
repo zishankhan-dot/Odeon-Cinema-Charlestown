@@ -3,6 +3,7 @@ li:a{
 }
 .card{
     border:none;
+    border-radius: 0px;
 }
 
 strong{
@@ -15,16 +16,19 @@ strong{
 .card-img-top{
     max-height: 425px;
     object-fit: cover;
-    opacity: 80%;
+    opacity: 75%;
     border:1px solid white;
+    border-radius: 0%;
 }
-.card-img-top:hover{
+.card:hover .card-img-top{
     opacity: 100%;
 }
+
 .card-body{
     background-color:rgb(8, 20, 36);
     color:white;
     border: 1px solid white;
+    border-radius: 0px;
 }
 .input-number{
     border-radius: 0%;
