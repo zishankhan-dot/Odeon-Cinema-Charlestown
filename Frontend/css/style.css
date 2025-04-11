@@ -10,8 +10,8 @@ strong{
     font-family:fantasy;
 }
 .carousel-image{
-    max-height: 650px;
-    object-fit: cover;
+    max-height:  550px;
+    object-fit: contain;
 }
 .card-img-top{
     max-height: 425px;
