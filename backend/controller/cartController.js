@@ -1,9 +1,10 @@
 import User from "../model/usermodel.js";
 import Cart from "../model/cartmodel.js";
+import { response } from "express";
 
 
 //controller function to post into cart ..
-export const cartItem=async (req,res,next)=>{
+export const cartItem=async (req,res)=>{
     const userId=req.userData.userId;
     const{MovieName,qty}=req.body;
     try {
@@ -28,10 +29,11 @@ export const cartItem=async (req,res,next)=>{
 
         await cart.save();
         console.log("cart updated successfully :",cart)
-        next();
+        res.status(200).json({message:"succesfully inserted"})
     }
     catch(err){
         console.log(err);
+        res.status(400).json({message:"failed!! "})
     }
 
 
@@ -53,3 +55,66 @@ export const retrieveItems=async(req,res)=>{
         })
     }
 }
+
+// middleware to retrieve req data and {patch} it into cart table 
+export const patchmovie=async(req,res)=>{
+   try{
+    const userId=await req.userData.userId;
+    console.log(userId)
+    const cart=await Cart.findOne({userId});
+    const {qty,name}=await req.body;
+    if(cart){
+      const existing=  cart.items.find(item=>item.MovieName===name)
+      console.log(existing)
+      if(existing){
+        existing.qty=qty;
+        await cart.save()
+        res.status(200).json({message:"updated !!"})
+      }
+      else{
+        res.status(400).json({message:"some error"})
+      }
+    }
+    else{
+        res.status(400).json({message:"some error 2"})
+    }
+   }
+   catch(err){
+    console.error(err)
+   }
+
+   
+   
+}
+
+
+// middleware to delete movies from cart  
+export const deletemovie=async(req,res)=>{
+    try{
+     const userId=await req.userData.userId;
+     console.log(userId)
+     const cart=await Cart.findOne({userId});
+     const {name}=await req.body;
+     if(cart){
+       const existing=  cart.items.find(item=>item.MovieName===name)
+     //  console.log(existing)
+       if(existing){
+         existing.deleteOne();
+         await cart.save()
+         res.status(200).json({message:"deleted !!"})
+       }
+       else{
+         res.status(400).json({message:"some error"})
+       }
+     }
+     else{
+         res.status(400).json({message:"some error 2"})
+     }
+    }
+    catch(err){
+     console.error(err)
+    }
+ 
+    
+    
+ }

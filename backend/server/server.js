@@ -68,11 +68,7 @@ express_api.post('/user.html',(req,res)=>{
 express_api.use('/User',userRouter);
 
 //cart route 
-express_api.use('/cart',cartRouter,(req,res)=>{
-    res.status(200).json({
-        message:"updated successfully !!"
-    })
-});
+express_api.use('/cart',cartRouter);
 
 
 express_api.listen(PORT,HOST,(err)=>{

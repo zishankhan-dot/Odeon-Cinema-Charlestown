@@ -23,7 +23,7 @@ const qty=parseInt(e.target.closest('.card-body').querySelector('.input-number')
 console.log(MovieName,qty);
 
     fetch("/cart/post",{
-        method:"post",
+        method:"POST",
         headers:{"content-type":'application/json'},
         body:JSON.stringify({MovieName,qty})
     }).then(data=>console.log(data))

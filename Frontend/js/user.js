@@ -51,6 +51,12 @@ function signIn(){
         },
         body:JSON.stringify({Email,Password})
     })
-    .then(data=>console.log(data))
+    .then(res=>res.json())
+    .then(data=>{console.log(data.role)
+            if(data.role==="Admin"){
+                window.location.href="/admin.html"
+            }
+            else (window.location.href="/cart.html")
+    })
     .catch(err=>console.error(err));
 }
