@@ -2,22 +2,22 @@
  --------------------------------------------------------------Odeon Charlestown---------------------------------------------------------------------------------------------------------
 
 
- ✅ Business Requirements and Functionalities
+ Business Requirements and Functionalities
 
-    🎬 Movie Listings: Home page displays a collection of movies with cards and a Bootstrap carousel.
+    Movie Listings: Home page displays a collection of movies with cards and a Bootstrap carousel.
 
-    👤 User Login/Signup: Users can register and login using email and password - redirect user based on role.
+    User Login/Signup: Users can register and login using email and password - redirect user based on role.
 
-    🛒 Cart System: Logged-in users can add movies to their cart, update quantity, or delete movies.
+    Cart System: Logged-in users can add movies to their cart, update quantity, or delete movies.
 
-    🔐 Admin Access: Admin users (verified via email stored in admin.json) can view all user data in /Admin.html where userdetail will be fetched dynamically.
+    Admin Access: Admin users (verified via email stored in admin.json) can view all user data in /Admin.html where userdetail will be fetched dynamically.
 
-    📦 Order Handling: Cart updates reflect user-specific movie selections with quantities on cart page which can be accesed dynamically in table format with button to update and      delete in /cart.html (path)
+     Order Handling: Cart updates reflect user-specific movie selections with quantities on cart page which can be accesed dynamically in table format with button to update and      delete in /cart.html (path)
 
-    🔄 Dynamic Frontend: Pages use JavaScript to handle interactions like add/remove movies, update cart, fetch cart , fetch user-admin only and so on.
+     Dynamic Frontend: Pages use JavaScript to handle interactions like add/remove movies, update cart, fetch cart , fetch user-admin only and so on.
 
 
-    🧰 Tools & Technologies Used
+     Tools & Technologies Used
 
 Backend:
 
@@ -51,7 +51,7 @@ Other Tools:
 
     mongodb & mongoose – for database interaction
 
-🗂️ Project Structure Overview
+Project Structure Overview
 
      – Static files (HTML, CSS, JS) are fetched by express static sending Frontend(folder) as base 
 
