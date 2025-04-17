@@ -57,7 +57,7 @@ if(Admin){
         },secretkey,{expiresIn:'1h'});
         res.cookie("authorization",token,{maxAge:3600000})
        return res.status(200).json({
-            message:"succesfully loged admin",
+            message:"succesfully logged admin",
             role:"Admin"
         })
       
@@ -97,6 +97,7 @@ export const checkTokenShareUserDetail=(req,res,next)=>{
        const decode= jwt.verify(token,secretkey)
         req.userData=decode;
         console.log("successfull verification !!");
+        console.log(decode)
         next();
     
     }
@@ -114,4 +115,27 @@ export const userDetail=(req,res,next)=>{
     console.log(userId,Email)
     next()
     
+}
+
+
+/// sending all user detail for user database 
+export const  adminUser= async (req,res)=>{
+const {Admin}=req.userData;
+//console.log(Admin)
+//console.log(req.userData)
+if(!Admin){
+    return res.status(402).json({
+        message:"User Not Admin"
+    })
+}
+const users=await User.find();
+console.log(users)
+return res.status(200).json({
+    users
+})
+
+
+
+
+
 }

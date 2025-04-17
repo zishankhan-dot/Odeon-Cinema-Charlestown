@@ -2,6 +2,20 @@ document.addEventListener("DOMContentLoaded",()=>{
     fetchMovies();
 })
 
+document.getElementById("container").addEventListener("click", function (e) {
+    if (e.target.classList.contains("plus")) {
+        let input = e.target.parentElement.querySelector(".input-number");
+        input.value = parseInt(input.value) + 1;
+    }
+
+    if (e.target.classList.contains("minus")) {
+        let input = e.target.parentElement.querySelector(".input-number");
+        let currentValue = parseInt(input.value);
+        if (currentValue > 0) {
+            input.value = currentValue - 1;
+        }
+    }
+});
 
 
 
@@ -67,13 +81,13 @@ async function fetchMovies(){
                 card.classList.add("cart-father");
                 card.innerHTML=`
                     <td scope="row" class="cart-movie">${element.MovieName}</td>
-                    <td scope="row">${element.price}</td>
-                    <td>
-                    <div scope='row' class="w-50 btn-group h6 d-flex justify-content-middle w-100 " >
+                    <td scope="row">${element.Price}</td>
+                    <td style="width:30%;">
+                    <div scope='row' class="w-50 btn-group h6 d-flex justify-content-middle w-100 "  id="cartInfo">
                                 <button type="button" class="btn btn-dark btn-sm plus" >+</button>
                                 <input type="text" style="width:20%;text-align: center;" class="input-number cart-qty" value="${element.qty}">
                                 <button type="button" class="btn btn-dark minus" >-</button>
-                                <button type="button" class="btn btn-danger btn-update" onclick="updateqty(this)">UPDATE</button>
+                                <button type="button" class="btn btn-dark btn-update" onclick="updateqty(this)" style="margin-right:5px;margin-left:5px;">UPDATE</button>
                                 <button type="button" class="btn btn-danger btn-update container-fluid" onclick="deletemovie(this)">DELETE</button>
                         </div>
                     </td>`;

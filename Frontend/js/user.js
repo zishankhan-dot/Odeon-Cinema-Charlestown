@@ -34,7 +34,9 @@
         },
         body:JSON.stringify({Name,Email,Password,ConfirmPassword})
 
-        }).then(data=>{console.log(data)})
+        }).then(data=>{console.log(data)
+            window.location.href="/"
+        })
         .catch(err=>{console.error(err)})
     
     }
@@ -47,7 +49,7 @@ function signIn(){
     fetch("User/login",{
         method:"Post",
         headers:{
-            "content-type":"application/json"
+            "Content-Type":"application/json"
         },
         body:JSON.stringify({Email,Password})
     })
@@ -56,7 +58,7 @@ function signIn(){
             if(data.role==="Admin"){
                 window.location.href="/admin.html"
             }
-            else (window.location.href="/cart.html")
+            else {window.location.href="/"}
     })
     .catch(err=>console.error(err));
 }

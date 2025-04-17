@@ -6,7 +6,7 @@ import { response } from "express";
 //controller function to post into cart ..
 export const cartItem=async (req,res)=>{
     const userId=req.userData.userId;
-    const{MovieName,qty}=req.body;
+    const{MovieName,qty,Price}=req.body;
     try {
         let cart = await Cart.findOne({userId})
         if(cart){
@@ -15,14 +15,14 @@ export const cartItem=async (req,res)=>{
                 exisitingMovie.qty+=qty;
             }
             else{
-                cart.items.push({MovieName,qty});
+                cart.items.push({MovieName,qty,Price});
             }
 
         }
         else{
             cart =new Cart({
                 userId,
-                items:[{MovieName,qty}]
+                items:[{MovieName,qty,Price}]
         });
 
         }
@@ -39,7 +39,7 @@ export const cartItem=async (req,res)=>{
 
 }
 
-//controller to retrieve all cart item for give user 
+//controller to retrieve all cart item for given user 
 export const retrieveItems=async(req,res)=>{
     const userId=req.userData.userId;
     const cart= await Cart.findOne({userId});
