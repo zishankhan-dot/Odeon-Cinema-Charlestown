@@ -108,6 +108,8 @@ export const checkTokenShareUserDetail=(req,res,next)=>{
          
     }
 }
+
+
 //sending user detail to fronend .. Middleware
 export const userDetail=(req,res,next)=>{
     const userId=req.userData.userId;
@@ -137,5 +139,21 @@ return res.status(200).json({
 
 
 
+
+}
+
+
+
+/// taking useremail from req and deleting it from userdatabase 
+export const userdelete=async (req,res)=>{
+    const {Email} =req.body;
+     console.log(Email)
+    const deletedUser= await User.findOneAndDelete({Email:Email});
+    if(deletedUser){
+       return res.status(200).json({message:"Deleted"})
+    }
+    else{
+      return  res.status(400).json({message:"ERROR "})
+    }
 
 }
