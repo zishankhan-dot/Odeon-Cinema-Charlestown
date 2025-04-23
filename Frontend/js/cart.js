@@ -48,6 +48,6 @@ console.log(MovieName,qty,Price);
         headers:{"content-type":'application/json'},
         body:JSON.stringify({MovieName,qty,Price})
     }).then(data=>console.log(data))
-    .catch(err=>console.error(err));
+    .catch(error)(alert("login first"));
     }
 })

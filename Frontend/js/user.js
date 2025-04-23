@@ -35,7 +35,7 @@
         body:JSON.stringify({Name,Email,Password,ConfirmPassword})
 
         }).then(data=>{console.log(data)
-            window.location.href="/"
+            window.location.href="/user.html"
         })
         .catch(err=>{console.error(err)})
     
